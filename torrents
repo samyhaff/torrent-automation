@@ -1,7 +1,7 @@
 #!/bin/bash
 
 query="$1"
-list=$(./torrentscrap "$(echo $query | sed 's/ /+/g')")
+list=$(torrentscrap "$(echo $query | sed 's/ /+/g')")
 choice=$(echo "$list" | dmenu -l 10)
 download=$(echo $choice | awk '{print $NF}')
-qbittorrent https://nyaa.si$download
+! [ -z $download ] && qbittorrent https://nyaa.si$download &
